@@ -39,8 +39,6 @@ Test Case 1 EXTR Navigation
     Sleep               2s
 
 Test Case 2 EXTR Login
-
-
     Input Text          //*[@id="usernameInput"]    ${username2}
     Input Text          //*[@id="passwordInput"]    ${password1}
     Sleep               2s
@@ -60,4 +58,17 @@ Test Case 2 EXTR Login
     Input Text          //*[@id="passwordInput"]    ${password2}
     Sleep               2s
     Click Element       //*[@id="loginBtn"]
+    Sleep               2s
+
+Test Case 3 Dashboard Navigation
+    Sleep               2s
+    Click Element       //*[@id="loginnavbtn"]
+    Sleep               2s
+    Click Element       //*[@id="regnavbtn"]
+    Sleep               2s
+    Click Element       //*[@id="tologinnav"]
+    Sleep               2s
+    Click Element       //*[@id="tofpassnav"]
+    Sleep               2s
+    Click Element       //*[@id="goBack"]
     Sleep               2s
