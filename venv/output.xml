@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.0 on win32)" generated="20241129 23:10:19.348" rpa="false" schemaversion="4">
+<suite id="s1" name="Extr Automation" source="C:\py-workspace\ASIJumpStart2024-Group1_ASIBasecodeCSharp2024-AutomationTesting\venv\extr_automation.robot">
+<test id="s1-t1" name="Open Google Chrome" line="9">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${URL}</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20241129 23:10:19.604" level="INFO">Opening browser 'Edge' to base url 'https://www.google.com'.</msg>
+<status status="PASS" starttime="20241129 23:10:19.604" endtime="20241129 23:10:22.216"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20241129 23:10:22.220" endtime="20241129 23:10:23.109"/>
+</kw>
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Google</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20241129 23:10:23.124" level="INFO">Page title is 'Google'.</msg>
+<status status="PASS" starttime="20241129 23:10:23.110" endtime="20241129 23:10:23.124"/>
+</kw>
+<kw name="Sleep" library="BuiltIn">
+<arg>30s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<msg timestamp="20241129 23:10:53.129" level="INFO">Slept 30 seconds</msg>
+<status status="PASS" starttime="20241129 23:10:23.125" endtime="20241129 23:10:53.129"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20241129 23:10:53.146" endtime="20241129 23:10:55.809"/>
+</kw>
+<status status="PASS" starttime="20241129 23:10:19.603" endtime="20241129 23:10:55.810"/>
+</test>
+<status status="PASS" starttime="20241129 23:10:19.349" endtime="20241129 23:10:55.811"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Extr Automation">Extr Automation</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
