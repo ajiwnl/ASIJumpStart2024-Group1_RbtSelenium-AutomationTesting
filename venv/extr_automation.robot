@@ -61,14 +61,13 @@ Test Case 2 EXTR Login
     Sleep               2s
 
 Test Case 3 Dashboard Navigation
+    Click Element       //*[@id="sumanalytics"]
     Sleep               2s
-    Click Element       //*[@id="loginnavbtn"]
+    Click Element       //*[@id="catdetails"]
     Sleep               2s
-    Click Element       //*[@id="regnavbtn"]
+    Click Element       //*[@id="expdetails"]
     Sleep               2s
-    Click Element       //*[@id="tologinnav"]
+    Click Element       //*[@id="settings"]
     Sleep               2s
-    Click Element       //*[@id="tofpassnav"]
-    Sleep               2s
-    Click Element       //*[@id="goBack"]
+    Click Element       //*[@id="catdetails"]
     Sleep               2s
