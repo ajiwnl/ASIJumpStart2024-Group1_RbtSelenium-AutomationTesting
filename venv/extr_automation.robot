@@ -14,6 +14,7 @@ ${username3}         aiahtot
 ${password3}         12121212
 ${categoryTitle}         Food Expense
 ${dupeCategoryTitle}     Transportation
+${newCategoryTitle}      Transpo
 ${catSuccessMsg}         Category added successfully!
 ${dupeCatMsg}            A category with this title already exists.
 ${catFldRequired}        Category title is required.
@@ -38,8 +39,6 @@ Close Browser Session
 Test Case 1 EXTR Navigation
     [Documentation]    Test navigation and browser responsiveness
     Sleep               2s
-
-    # Fullscreen navigation check
     Click Element       //*[@id="loginnavbtn"]
     Sleep               2s
     Click Element       //*[@id="regnavbtn"]
@@ -51,23 +50,6 @@ Test Case 1 EXTR Navigation
     Click Element       //*[@id="goBack"]
     Sleep               2s
 
-    # Responsive check - Tablet
-    Set Window Size      768    1024    # Width and height for tablet screen size
-    Sleep                2s
-    Page Should Contain Element   //*[@id="loginnavbtn"]
-    Page Should Contain Element   //*[@id="regnavbtn"]
-    Sleep                2s
-
-    # Responsive check - Mobile
-    Set Window Size      375    667    # Width and height for mobile screen size
-    Sleep                2s
-    Page Should Contain Element   //*[@id="loginnavbtn"]
-    Page Should Contain Element   //*[@id="regnavbtn"]
-    Sleep                2s
-
-    # Return to default size
-    Maximize Browser Window
-    Sleep                2s
 
 Test Case 2 EXTR Login
     Input Text          //*[@id="usernameInput"]    ${username2}
@@ -126,6 +108,44 @@ Test Cases 4 Add Category, Field Validation and Duplicate Check
     Should Be Equal         ${toast_message}          ${dupeCatMsg}
     Sleep                   2s
 
+Test Case 5 Edit and Delete Category
+    Click Button            ${dupeCategoryTitle}
+    Input Text              //*[@id="editCategoryTitle"]    ${newCategoryTitle}
+    Click Button            Save Changes
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Category updated successfully!
+    Sleep                   2s
+    Click Button            ${newCategoryTitle}
+    Click Button            Delete
+    Sleep                   2s
+    Click Button            Yes, delete it!
+    Sleep                   2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Category deleted successfully.
+    Sleep                   2s
+
+
+
+Test Case X Responsive check
+# Responsive check - Tablet
+    Set Window Size      768    1024    # Width and height for tablet screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Responsive check - Mobile
+    Set Window Size      375    667    # Width and height for mobile screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Return to default size
+    Maximize Browser Window
+    Sleep                2s
 
 
 
