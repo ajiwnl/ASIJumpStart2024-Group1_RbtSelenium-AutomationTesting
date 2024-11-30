@@ -71,3 +71,5 @@ Test Case 3 Dashboard Navigation
     Sleep               2s
     Click Element       //*[@id="catdetails"]
     Sleep               2s
+
+Test Cases 4 Adding and Checking of duplicate category
