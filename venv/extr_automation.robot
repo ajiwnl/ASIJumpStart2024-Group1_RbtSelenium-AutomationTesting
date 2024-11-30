@@ -36,7 +36,10 @@ Close Browser Session
 *** Test Cases ***
 
 Test Case 1 EXTR Navigation
+    [Documentation]    Test navigation and browser responsiveness
     Sleep               2s
+
+    # Fullscreen navigation check
     Click Element       //*[@id="loginnavbtn"]
     Sleep               2s
     Click Element       //*[@id="regnavbtn"]
@@ -47,6 +50,24 @@ Test Case 1 EXTR Navigation
     Sleep               2s
     Click Element       //*[@id="goBack"]
     Sleep               2s
+
+    # Responsive check - Tablet
+    Set Window Size      768    1024    # Width and height for tablet screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Responsive check - Mobile
+    Set Window Size      375    667    # Width and height for mobile screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Return to default size
+    Maximize Browser Window
+    Sleep                2s
 
 Test Case 2 EXTR Login
     Input Text          //*[@id="usernameInput"]    ${username2}
