@@ -12,9 +12,19 @@ ${username2}         arya
 ${password2}         123456
 ${username3}         aiahtot
 ${password3}         12121212
+${categoryTitle}         Food Expense
+${dupeCategoryTitle}     Transportation
+${catSuccessMsg}         Category added successfully!
+${dupeCatMsg}            A category with this title already exists.
+${catFldRequired}        Category title is required.
+${TOAST_XPATH}        //div[contains(@class, 'toast-message')]
+
+
+
+
+
 
 *** Keywords ***
-
 Open Browser Session
     Open Browser    ${URL}    ${BROWSER}
     Maximize Browser Window
@@ -72,4 +82,30 @@ Test Case 3 Dashboard Navigation
     Click Element       //*[@id="catdetails"]
     Sleep               2s
 
-Test Cases 4 Adding and Checking of duplicate category
+Test Cases 4 Add Category, Field Validation and Duplicate Check
+
+    # Adding category
+    Input Text              //*[@id="category-input"]   ${categoryTitle}
+    Click Button            //*[@id="addCategory"]
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          ${catSuccessMsg}
+    Sleep                   2s
+
+    # Category title is required
+    Click Button            //*[@id="addCategory"]
+    Page Should Contain     ${catFldRequired}
+    Sleep                   2s
+
+    # Duplicate category check
+    Input Text              //*[@id="category-input"]   ${dupeCategoryTitle}
+    Click Button            //*[@id="addCategory"]
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          ${dupeCatMsg}
+    Sleep                   2s
+
+
+
+
+
