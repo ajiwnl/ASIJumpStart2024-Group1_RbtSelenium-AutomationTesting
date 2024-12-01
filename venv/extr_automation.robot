@@ -50,7 +50,6 @@ Test Case 1 EXTR Navigation
     Click Element       //*[@id="goBack"]
     Sleep               2s
 
-
 Test Case 2 EXTR Login
     Input Text          //*[@id="usernameInput"]    ${username2}
     Input Text          //*[@id="passwordInput"]    ${password1}
@@ -86,7 +85,6 @@ Test Case 3 Dashboard Navigation
     Sleep               2s
 
 Test Cases 4 Add Category, Field Validation and Duplicate Check
-
     # Adding category
     Input Text              //*[@id="category-input"]   ${categoryTitle}
     Click Button            //*[@id="addCategory"]
@@ -109,6 +107,7 @@ Test Cases 4 Add Category, Field Validation and Duplicate Check
     Sleep                   2s
 
 Test Case 5 Edit and Delete Category
+    # Edit Category
     Click Button            ${dupeCategoryTitle}
     Input Text              //*[@id="editCategoryTitle"]    ${newCategoryTitle}
     Click Button            Save Changes
@@ -116,6 +115,8 @@ Test Case 5 Edit and Delete Category
     ${toast_message}=       Get Text                  ${TOAST_XPATH}
     Should Be Equal         ${toast_message}          Category updated successfully!
     Sleep                   2s
+
+    # Delete Category
     Click Button            ${newCategoryTitle}
     Click Button            Delete
     Sleep                   2s
@@ -126,26 +127,92 @@ Test Case 5 Edit and Delete Category
     Should Be Equal         ${toast_message}          Category deleted successfully.
     Sleep                   2s
 
+Test Case 6 Add, Validated input fields, and No Wallet Balance
+    # Validate input fields
+    Click Element           //*[@id="expdetails"]
+    Title Should Be         Expense
+    Click Button            //*[@id="submitBtn"]
+    Page Should Contain     Expense Name is required.
+    Page Should Contain     Date is required.
+    Sleep                   2s
+
+    #Add Expense
+    Select From List By Label    //*[@id="categoryInput"]    Bills Expense
+    Sleep                   1s
+    Input Text                  //*[@id="expenseInput"]      Internet
+    Sleep                   1s
+    Input Text                   //*[@id="amountInput"]       1500
+    Sleep                   1s
+    Input Text                  //*[@id="dateInput"]          11-30-2024
+    Sleep                   1s
+    Input Text                  //*[@id="descriptionInput"]   Billing for this month
+    Sleep                   1s
+    Click Button                //*[@id="submitBtn"]
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Expense added successfully!
+    Sleep                   2s
+    Click Element           //*[@id="catdetails"]
+    Page Should Contain     Internet
+    Sleep                   2s
+
+    #Wallet balance check
+    Click Element           //*[@id="expdetails"]
+    Sleep                   1s
+    Select From List By Label    //*[@id="categoryInput"]    Food Expense
+    Sleep                        1s
+    Input Text                  //*[@id="expenseInput"]      Breakfast meal
+    Sleep                        1s
+    Input Text                   //*[@id="amountInput"]      150
+    Sleep                        1s
+    Input Text                  //*[@id="dateInput"]         11-30-2024
+    Sleep                        1s
+    Input Text                  //*[@id="descriptionInput"]  Food budget
+    Sleep                        1s
+    Click Button                //*[@id="submitBtn"]
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          An error occurred while adding the expense. Verify your wallet balance
+    Sleep                   2s
+    Click Element           //*[@id="catdetails"]
+    Sleep                   2s
+
+Test Case 7 Edit and Delete of Expense
+    # Delete Expense
+    Page Should Contain     Category Management
+    Click Button            //tr[td[text()="Internet"]]//button[contains(@id, "deleteExpense")]
+    Sleep                   2s
+    Click Button            Yes, delete it!
+    Sleep                   2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Expense deleted successfully!
+    Sleep                   2s
+
+    # Edit Expense
+    Click Button            //tr[td[text()="Kuryente"]]//button[contains(@id, "editExpense")]
+    Input Text              //*[@id="description"]      VECO billing partial
+    Click Button            Save
+    Sleep                   2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Expense updated successfully!
+    Sleep                   2s
 
 
-Test Case X Responsive check
-# Responsive check - Tablet
-    Set Window Size      768    1024    # Width and height for tablet screen size
-    Sleep                2s
-    Page Should Contain Element   //*[@id="loginnavbtn"]
-    Page Should Contain Element   //*[@id="regnavbtn"]
-    Sleep                2s
 
-    # Responsive check - Mobile
-    Set Window Size      375    667    # Width and height for mobile screen size
-    Sleep                2s
-    Page Should Contain Element   //*[@id="loginnavbtn"]
-    Page Should Contain Element   //*[@id="regnavbtn"]
-    Sleep                2s
 
-    # Return to default size
-    Maximize Browser Window
-    Sleep                2s
+
+
+
+
+
+
+
+
+
+
+
 
 
 
