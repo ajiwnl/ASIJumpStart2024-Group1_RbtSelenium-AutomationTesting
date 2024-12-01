@@ -72,6 +72,8 @@ Test Case 3 Dashboard Navigation
     Sleep               2s
     Click Element       //*[@id="catdetails"]
     Sleep               2s
+    Click Element       //*[@id="walletdetails"]
+    Sleep               2s
     Click Element       //*[@id="expdetails"]
     Sleep               2s
     Click Element       //*[@id="settings"]
@@ -126,7 +128,7 @@ Test Case 5 Edit and Delete Category
     Should Be Equal         ${toast_message}          Category deleted successfully.
     Sleep                   2s
 
-Test Case 6 Add, Validated input fields, and No Wallet Balance
+Test Case 6 Add, Validated input fields, and Wallet Validation
     # Validate input fields
     Click Element           //*[@id="expdetails"]
     Title Should Be         Expense
@@ -169,12 +171,55 @@ Test Case 6 Add, Validated input fields, and No Wallet Balance
     Input Text                  //*[@id="descriptionInput"]  Food budget
     Sleep                        1s
     Click Button                //*[@id="submitBtn"]
+    Sleep                       2s
     Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
     ${toast_message}=       Get Text                  ${TOAST_XPATH}
     Should Be Equal         ${toast_message}          An error occurred while adding the expense. Verify your wallet balance
     Sleep                   2s
     Click Element           //*[@id="catdetails"]
     Sleep                   2s
+
+    #Add Wallet
+    Click Element           //*[@id="walletdetails"]
+    Sleep                   1s
+    Page Should Contain     Add Funds
+    Click Button            //*[@id="addFunds"]
+    Sleep                   1s
+    Select From List By Label    //*[@id="categorySelect"]    Food Expense
+    Sleep                   1s
+    Input Text              //*[@id="amountInput"]            1500
+    Sleep                   1s
+    Click Button           Add Funds
+    Sleep                   2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Successfully added ₱1,500.00 to budget
+    Sleep                   2s
+
+    #Add new expense for food Expense category
+    Click Element           //*[@id="expdetails"]
+    Sleep                   1s
+    Select From List By Label    //*[@id="categoryInput"]    Food Expense
+    Sleep                        1s
+    Input Text                  //*[@id="expenseInput"]      Breakfast meal
+    Sleep                        1s
+    Input Text                   //*[@id="amountInput"]      150
+    Sleep                        1s
+    Input Text                  //*[@id="dateInput"]         12-01-2024
+    Sleep                        1s
+    Input Text                  //*[@id="descriptionInput"]  Food budget
+    Sleep                        1s
+    Click Button                //*[@id="submitBtn"]
+    Sleep                       2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Expense added successfully!
+    Sleep                   2s
+    Click Element           //*[@id="catdetails"]
+    Sleep                   2s
+
+
+
 
 Test Case 7 Edit and Delete of Expense
     # Delete Expense
