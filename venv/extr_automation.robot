@@ -20,11 +20,6 @@ ${dupeCatMsg}            A category with this title already exists.
 ${catFldRequired}        Category title is required.
 ${TOAST_XPATH}        //div[contains(@class, 'toast-message')]
 
-
-
-
-
-
 *** Keywords ***
 Open Browser Session
     Open Browser    ${URL}    ${BROWSER}
@@ -87,7 +82,9 @@ Test Case 3 Dashboard Navigation
 Test Cases 4 Add Category, Field Validation and Duplicate Check
     # Adding category
     Input Text              //*[@id="category-input"]   ${categoryTitle}
+    Sleep                   1s
     Click Button            //*[@id="addCategory"]
+    Sleep                   2s
     Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
     ${toast_message}=       Get Text                  ${TOAST_XPATH}
     Should Be Equal         ${toast_message}          ${catSuccessMsg}
@@ -100,7 +97,9 @@ Test Cases 4 Add Category, Field Validation and Duplicate Check
 
     # Duplicate category check
     Input Text              //*[@id="category-input"]   ${dupeCategoryTitle}
+    Sleep                   1s
     Click Button            //*[@id="addCategory"]
+    Sleep                   2s
     Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
     ${toast_message}=       Get Text                  ${TOAST_XPATH}
     Should Be Equal         ${toast_message}          ${dupeCatMsg}
