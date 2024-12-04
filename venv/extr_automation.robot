@@ -218,9 +218,6 @@ Test Case 6 Add, Validated input fields, and Wallet Validation
     Click Element           //*[@id="catdetails"]
     Sleep                   2s
 
-
-
-
 Test Case 7 Edit and Delete of Expense
     # Delete Expense
     Page Should Contain     Category Management
@@ -242,6 +239,79 @@ Test Case 7 Edit and Delete of Expense
     ${toast_message}=       Get Text                  ${TOAST_XPATH}
     Should Be Equal         ${toast_message}          Expense updated successfully!
     Sleep                   2s
+
+Test Case 8 Analytics Display
+    # Analytics Display
+    Click Element           //*[@id="sumanalytics"]
+    Title Should Be         Summary
+    Click Button            //*[@id="allBtn"]
+    Sleep                   2s
+    Click Button            //*[@id="todayBtn"]
+    Sleep                   2s
+    Click Button            //*[@id="weekBtn"]
+    Sleep                   2s
+    Click Button            //*[@id="monthBtn"]
+    Sleep                   2s
+    Select From List By Label    //*[@id="categoryBtn"]    Food Expense
+    Page Should Contain          Breakfast meal
+    Sleep                   2s
+    Input Text                  //*[@id="startDate"]         11-01-2024
+    Sleep                        1s
+    Input Text                  //*[@id="endDate"]           11-30-2024
+    Sleep                        1s
+    Page Should Contain         ₱5,000.00
+    Sleep                   2s
+
+Test Case 9 Settings and Pref Management
+    # Change Username
+    Click Element           //*[@id="settings"]
+    Title Should Be         Settings
+    Sleep                   2s
+    Click Button            //*[@id="newUNEditButton"]
+    Sleep                   1s
+    Input Text              //*[@id="usernameInput"]       capstone
+    Sleep                   1s
+    Click Button            //*[@id="newUNSubmitButton"]
+    Sleep                   2s
+    Wait Until Element Is Visible    ${TOAST_XPATH}    timeout=5s
+    ${toast_message}=       Get Text                  ${TOAST_XPATH}
+    Should Be Equal         ${toast_message}          Username updated successfully!
+    Sleep                   2s
+    Click Element           //*[@id="sumanalytics"]
+    Sleep                   2s
+    Title Should Be         Summary
+    Click Button             //*[@id="logout"]
+    Input Text          //*[@id="usernameInput"]    capstone
+    Input Text          //*[@id="passwordInput"]    123456
+    Sleep               2s
+    Click Element       //*[@id="loginBtn"]
+    Sleep               2s
+    Title Should Be         Summary
+    Click Button             //*[@id="logout"]
+    Sleep                   2s
+
+
+Test Case 10 Screen Responsiveness
+    # Responsive check - Tablet
+    Set Window Size      768    1024    # Width and height for tablet screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Responsive check - Mobile
+    Set Window Size      375    667    # Width and height for mobile screen size
+    Sleep                2s
+    Page Should Contain Element   //*[@id="loginnavbtn"]
+    Page Should Contain Element   //*[@id="regnavbtn"]
+    Sleep                2s
+
+    # Return to default size
+    Maximize Browser Window
+    Sleep                2s
+
+
+
 
 
 
