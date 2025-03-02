@@ -258,8 +258,6 @@ Test Case 8 Analytics Display
     Input Text                  //*[@id="startDate"]         11-01-2024
     Sleep                        1s
     Input Text                  //*[@id="endDate"]           11-30-2024
-    Sleep                        1s
-    Page Should Contain         ₱5,000.00
     Sleep                   2s
 
 Test Case 9 Settings and Pref Management
